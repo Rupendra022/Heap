@@ -1,0 +1,28 @@
+class Solution {
+    public int nthUglyNumber(int n) {
+
+        PriorityQueue<Long> pq = new PriorityQueue<>();
+
+        pq.add(1L);
+
+        Set<Long> set = new HashSet<>();
+
+        set.add(1L);
+        long ans = 1;
+        int[] fact = { 2, 3, 5 };
+        for (int i = 1; i <= n; i++) {
+            long current = pq.poll();
+            ans = current;
+            for (long factor : fact) {
+                long ele = factor * current;
+                if (!set.contains(ele)) {
+                    set.add(ele);
+                    pq.add(ele);
+                }
+
+            }
+        }
+
+        return (int) ans;
+    }
+}
